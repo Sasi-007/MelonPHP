@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#main {
+    font-family: 'Rubik', serif;
+    background-color: #f3f4f6;
+    width: auto;
+    height: auto;
+}
+
+.topic {
+    text-align: center;
+    font-size: 22px;
+    color: #0f0f0e;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+hr {
+    margin: 10px;
+    border-top: 1px solid #a6ada0;
+}
+
+p.subtopic {
+    font-size: 22px;
+    font-weight: bolder;
+}
