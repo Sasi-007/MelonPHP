@@ -42,12 +42,32 @@
             font-weight: bolder;
         }
 
-        .container {
-            padding-right: 0px !important;
-            padding-left: 0px !important;
-            margin-right: 0px !important;
-            margin-left: 0px !important;
+        button.actionbtn {
+            background-color: #0b4c72;
+            color: white;
+            font-weight: bolder;
         }
+
+        .rmbtn {
+            border-radius: 100%;
+        }
+
+        .txtjob {
+            width: 97%;
+        }
+
+        .jobtable {
+            padding: 0px 10px;
+        }
+
+        td.txt-adj {
+            width: 50%;
+        }
+
+        td.jobno {
+            width: 3%;
+        }
+
     </style>
 </head>
 <body>
@@ -58,45 +78,8 @@
         <hr>
         <p class="subtopic">ENTER TODAY TOP JOBS</p>
         <div class="btn">
-            <button class="add">ADD MORE</button>
-            <button class="remove">REMOVE</button>
-        </div>
-        <div class="job">
-            <div class="container">
-                <div class="row">
-                    <div class="col-3">
-                        <p style="margin-bottom: 0;">Jobs</p>
-                        <p style="margin-bottom: 0;">Job1: </p>
-                        <p style="margin-bottom: 0;">Job2: </p>
-                        <p style="margin-bottom: 0;">Job3: </p>
-                        <p style="margin-bottom: 0;">Job4: </p>
-                        <p style="margin-bottom: 0;">Job5: </p>
-                    </div>
-                    <div class="col-3">
-                        <p style="margin-bottom: 0;">Job Title</p>     
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                    </div>
-                    <div class="col-3">
-                        <p style="margin-bottom: 0;">Job Url</p>
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                        <input type="text" class="form-control" placeholder="Enter text here">
-                    </div>
-                    <div class="col-3">
-                        <button class="btn btn-danger" type="button" id="close-btn">X</button>
-                        <button class="btn btn-danger" type="button" id="close-btn">X</button>
-                        <button class="btn btn-danger" type="button" id="close-btn">X</button>
-                        <button class="btn btn-danger" type="button" id="close-btn">X</button>
-                        <button class="btn btn-danger" type="button" id="close-btn">X</button>
-                    </div>
-                </div>
-            </div>
+            <button class="add actionbtn">ADD MORE</button>
+            <button class="remove actionbtn">REMOVE</button>
         </div>
         <div class="container">
             <h2>To-Do List</h2>
@@ -119,39 +102,47 @@
                 </div>
             </div>
         </div>
+        <div class="jobtable">
+            <table id="myTable"></table>
+        </div>
     </div>
 </body>
 <script>
-    $(document).on('click', '#close-btn', function() {
-        $(this).closest('.card').remove();
+    $(document).ready(function() {
+        var table = $("#myTable");
+        table.append("<tr><th class='jobno'>Jobs</th><th>Job Title</th><th>Job Url</th></tr>");
+        for (var i = 0; i < 5; i++) {
+            table.append("<tr><td class='jobno'>Job" + (i + 1) + ":</td><td class='txt-adj'><input type='text' class='txtjob' name='txttitle"+(i+1)+"' id='title"+(i+1)+"'></td><td class='txt-adj'><input type='text' class='txtjob' name='txturl"+(i+1)+"' id='url"+(i+1)+"'></td><td class='jobno'><button class='btn btn-danger rmbtn' type='button' id='close-btn"+(i+1)+"'>X</button></td></tr>");
+        }
     });
+
     const inputField = document.getElementById("todo-item");
-  const addButton = document.getElementById("add-todo");
-  const todoList = document.getElementById("todo-items");
-  // Add event listener to the "Add" button
-  addButton.addEventListener("click", function() {
-    // Get the value of the input field
-    const todoItem = inputField.value;
-    // Create a new list item
-    const newItem = document.createElement("li");
-    newItem.classList.add("list-group-item");
-    // Create a new text node with the to-do item text
-    const itemText = document.createTextNode(todoItem);
-    // Append the text to the list item
-    newItem.appendChild(itemText);
-    // create a span element to hold close button
-    const span = document.createElement("span");
-    span.classList.add("close");
-    span.innerHTML = "&times;";
-    newItem.appendChild(span);
-    // Append the list item to the to-do list
-    todoList.appendChild(newItem);
-    // Clear the input field
-    inputField.value = "";
-    // Close button event listener 
-    span.addEventListener("click", function() {
-      newItem.remove();
+    const addButton = document.getElementById("add-todo");
+    const todoList = document.getElementById("todo-items");
+    // Add event listener to the "Add" button
+    addButton.addEventListener("click", function() {
+        // Get the value of the input field
+        const todoItem = inputField.value;
+        // Create a new list item
+        const newItem = document.createElement("li");
+        newItem.classList.add("list-group-item");
+        // Create a new text node with the to-do item text
+        const itemText = document.createTextNode(todoItem);
+        // Append the text to the list item
+        newItem.appendChild(itemText);
+        // create a span element to hold close button
+        const span = document.createElement("span");
+        span.classList.add("close");
+        span.innerHTML = "&times;";
+        newItem.appendChild(span);
+        // Append the list item to the to-do list
+        todoList.appendChild(newItem);
+        // Clear the input field
+        inputField.value = "";
+        // Close button event listener 
+        span.addEventListener("click", function() {
+            newItem.remove();
+        });
     });
-  });
 </script>
 </html>
