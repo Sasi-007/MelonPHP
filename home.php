@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hire lateral</title>
-    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Tangerine">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -40,6 +39,7 @@
         p.subtopic {
             font-size: 22px;
             font-weight: bolder;
+            margin: 10px;
         }
 
         button.actionbtn {
@@ -68,6 +68,58 @@
             width: 3%;
         }
 
+        button.codebtn {
+            background-color: #179721;
+            color: white;
+            font-weight: bolder;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        button.mailbtns {
+            margin: 0px 20px 0px 0px;
+            background-color: #355a66;
+            color: #f1f2dd;
+            font-weight: 600;
+            padding: 4px 24px 4px 24px;
+            border: 1px solid #355a66;
+        }
+
+        .mail {
+            margin: 30px;
+        }
+
+        .mailbtn {
+            padding: 10px 0px;
+            text-align: center;
+        }
+
+        .preview {
+            margin: 13px 0px 0px 0px;
+            padding: 3px 10px 0px 10px;
+            background-color: #cfcf5b;
+            color: #919237;
+            font-size: 23px;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .mails {
+            background-color: #f5f5dd;
+        }
+
+        textarea#webcode {
+            background-color: #f5f5dd;
+            border: none;
+            height: 500px;
+            width: 100%;
+            padding: 0px 20px 0px 20px;
+            resize: none;
+        }
+
     </style>
 </head>
 <body>
@@ -81,29 +133,38 @@
             <button class="add actionbtn">ADD MORE</button>
             <button class="remove actionbtn">REMOVE</button>
         </div>
-        <div class="container">
-            <h2>To-Do List</h2>
-            <div class="row" id="todo-list">
-                <div class="col-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="todo-item" placeholder="Enter a task">
-                    <div class="input-group-append">
-                    <button class="btn btn-primary" id="add-todo">Add</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12">
-                <ul class="list-group" id="todo-items">
-                    <!-- To-do items will be added here -->
-                </ul>
-                </div>
-            </div>
-        </div>
         <div class="jobtable">
             <table id="myTable"></table>
+        </div>
+        <p class="subtopic">SEARCH JOBS WITH LIMIT</p>
+        <div class="jobsearch">
+            <select id="joblimit">
+                <option disabled selected>Select Limit</option>
+                <option value="option1">1</option>
+                <option value="option2">2</option>
+                <option value="option3">3</option>
+                <option value="option4">4</option>
+                <option value="option5">5</option>
+            </select>
+            <button class="add actionbtn">SEARCH JOBS</button>
+        </div>
+        <div class="search-bar">
+            <input type="text" name="jobtext" id="jobtext">
+        </div>
+        <button type="submit" class="codebtn">GET CODE</button>
+        <div class="mail">
+            <div class="preview">
+                <p>MAIL PREVIEW</p>
+            </div>
+            <div class="mails">
+                <div class="mailbtn">
+                    <button class="sourcebtn mailbtns">SOURCE CODE</button>
+                    <button class="previewbtn mailbtns">PREVIEW</button>
+                </div>
+                <div class="desc">
+                    <textarea name="code" id="webcode" readonly>Hello</textarea>
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -119,37 +180,19 @@
             var trClass = $(this).closest("tr").attr("class");
             $("."+trClass+"").remove();
         });
-    });
 
-    const inputField = document.getElementById("todo-item");
-    const addButton = document.getElementById("add-todo");
-    const todoList = document.getElementById("todo-items");
-    // Add event listener to the "Add" button
-    addButton.addEventListener("click", function() {
-        console.log("item added");
-        // Get the value of the input field
-        const todoItem = inputField.value;
-        // Create a new list item
-        const newItem = document.createElement("li");
-        newItem.classList.add("list-group-item");
-        // Create a new text node with the to-do item text
-        const itemText = document.createTextNode(todoItem);
-        // Append the text to the list item
-        newItem.appendChild(itemText);
-        // create a span element to hold close button
-        const span = document.createElement("span");
-        span.classList.add("close");
-        span.innerHTML = "&times;";
-        newItem.appendChild(span);
-        // Append the list item to the to-do list
-        todoList.appendChild(newItem);
-        // Clear the input field
-        inputField.value = "";
-        // Close button event listener 
-        span.addEventListener("click", function() {
-            newItem.remove();
-            console.log("item removed");
+        var code = "";
+        code += $('html').html();
+        code += "\n\n";
+        $("style,link[rel='stylesheet']").each(function(){
+            code += $(this).text();
         });
+        code += "\n\n";
+        $("script").each(function(){
+            code += $(this).text();
+        });
+        $("textarea").text(code);
+
     });
 </script>
 </html>
