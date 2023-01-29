@@ -112,8 +112,13 @@
         var table = $("#myTable");
         table.append("<tr><th class='jobno'>Jobs</th><th>Job Title</th><th>Job Url</th></tr>");
         for (var i = 0; i < 5; i++) {
-            table.append("<tr><td class='jobno'>Job" + (i + 1) + ":</td><td class='txt-adj'><input type='text' class='txtjob' name='txttitle"+(i+1)+"' id='title"+(i+1)+"'></td><td class='txt-adj'><input type='text' class='txtjob' name='txturl"+(i+1)+"' id='url"+(i+1)+"'></td><td class='jobno'><button class='btn btn-danger rmbtn' type='button' id='close-btn"+(i+1)+"'>X</button></td></tr>");
+            table.append("<tr class='trow"+(i+1)+"'><td class='jobno'>Job" + (i + 1) + ":</td><td class='txt-adj'><input type='text' class='txtjob' name='txttitle"+(i+1)+"' id='title"+(i+1)+"'></td><td class='txt-adj'><input type='text' class='txtjob' name='txturl"+(i+1)+"' id='url"+(i+1)+"'></td><td class='jobno'><button class='btn btn-danger rmbtn' type='button' id='close-btn"+(i+1)+"'>X</button></td></tr>");
         }
+
+        $(document).on("click",".rmbtn", function() {
+            var trClass = $(this).closest("tr").attr("class");
+            $("."+trClass+"").remove();
+        });
     });
 
     const inputField = document.getElementById("todo-item");
@@ -121,6 +126,7 @@
     const todoList = document.getElementById("todo-items");
     // Add event listener to the "Add" button
     addButton.addEventListener("click", function() {
+        console.log("item added");
         // Get the value of the input field
         const todoItem = inputField.value;
         // Create a new list item
@@ -142,6 +148,7 @@
         // Close button event listener 
         span.addEventListener("click", function() {
             newItem.remove();
+            console.log("item removed");
         });
     });
 </script>
