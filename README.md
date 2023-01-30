@@ -2,6 +2,8 @@
 
 DBname: melonjobs
 
+Run below sql commands to create table and insert sample data for testing purpose 
+
 CREATE TABLE `jobs` (
   `title` varchar(900) NOT NULL,
   `url` varchar(900) NOT NULL,
