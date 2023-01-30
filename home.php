@@ -155,6 +155,51 @@
             padding: 0px 20px 0px 20px;
             resize: none;
         }
+/* embed below to id webdesign div */
+
+        div#webdesign {
+            margin: 0px 290px;
+        }
+
+        .post {
+            background-color: white;
+            padding: 0px 25px;
+        }
+
+        p.postpar {
+            font-size: 18px;
+            font-weight: bold;
+            color: #abafb3;
+            margin: 0px 0px 15px 0px;
+        }
+        
+        table.tablepost {
+            border: 1px solid black;
+        }
+
+        button.applybtn {
+            background-color: #ed931d;
+            color: white;
+            font-weight: 700;
+            border: 1px solid #ed931d;
+            border-radius: 3px;
+            padding: 3px;
+            margin: 10px 0px 10px 5px;
+        }
+
+        p.posttxt {
+            font-size: 22px;
+            font-weight: bolder;
+            margin: 0px 0px 0px 5px;
+            line-height: 1;
+        }
+
+        p.theadtxt {
+            font-weight: bold;
+            color: #464646;
+            font-size: 16px;
+            margin: 0px 0px 0px 5px;
+        }
 
     </style>
 </head>
@@ -200,7 +245,23 @@
                     <button class="previewbtn mailbtns">PREVIEW</button>
                 </div>
                 <div class="desc">
-                    <textarea name="code" id="webcode" readonly>Hello</textarea>
+                    <textarea name="code" id="webcode" readonly></textarea>
+                    <div id="webdesign">
+                        <div class="post">
+                            <p class="postpar">Dear Jobseekers,</p>
+                            <p class="postpar">Latest Government jobs on hirelateral.com</p>
+                            <div class="posts">
+                                <table class="tablepost">
+                                    <tr>
+                                        <th><p class="theadtxt">POST</p></th>
+                                    </tr>
+                                    <tr>
+                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><button class="applybtn">APPLY HERE</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -230,8 +291,13 @@
             code += $(this).text();
         });
         $("textarea").text(code);
+        $("#webcode").hide();
+        $("#webdesign").show();
         $(".sourcebtn").click(function(){
             $("#webcode").toggle();
+        });
+        $(".previewbtn").click(function(){
+            $("#webdesign").toggle();
         });
     });
 </script>
