@@ -172,9 +172,16 @@
             color: #abafb3;
             margin: 0px 0px 15px 0px;
         }
+
+        p.qualtxt {
+            font-size: 16px;
+            padding: 8px 0px 0px 5px;
+            font-weight: 600;
+            color: #7d7b7c;
+        }
         
-        table.tablepost {
-            border: 1px solid black;
+        tr.posttr {
+            border: 2px solid #717277;
         }
 
         button.applybtn {
@@ -183,8 +190,8 @@
             font-weight: 700;
             border: 1px solid #ed931d;
             border-radius: 3px;
-            padding: 3px;
-            margin: 10px 0px 10px 5px;
+            padding: 5px 4px;
+            margin: 15px 0px 10px 5px;
         }
 
         p.posttxt {
@@ -252,11 +259,17 @@
                             <p class="postpar">Latest Government jobs on hirelateral.com</p>
                             <div class="posts">
                                 <table class="tablepost">
-                                    <tr>
+                                    <tr class="posttr">
                                         <th><p class="theadtxt">POST</p></th>
                                     </tr>
-                                    <tr>
-                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><button class="applybtn">APPLY HERE</button></td>
+                                    <tr class="posttr">
+                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><a href="a.html"><button class="applybtn">APPLY HERE</button></a></td>
+                                    </tr>
+                                    <tr class="posttr">
+                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class="qualtxt">Qualification - M.Sc</p><p class="qualtxt">Salary - 20000 - 31000(Per Month)</p><a href="a.html"><button class="applybtn">APPLY HERE</button></a></td>
+                                    </tr>
+                                    <tr class="posttr">
+                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class="qualtxt">Qualification - M.Sc</p><p class="qualtxt">Salary - 20000 - 31000(Per Month)</p><a href="a.html"><button class="applybtn">APPLY HERE</button></a></td>
                                     </tr>
                                 </table>
                             </div>
