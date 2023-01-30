@@ -216,10 +216,11 @@
         var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
         $.ajax({
             url: 'getdata.php',
-            type: 'GET',
-            dataType: 'json',
+            type: 'POST',
+            data: {search:"start"},
             success: function(data) {
-                $.each(data, function(i, item) {
+                myObj = JSON.parse(data);
+                $.each(myObj, function(i, item) {
                     title = item.title;
                     qualification = item.qualification;
                     salary = item.salary;
@@ -244,6 +245,39 @@
         $(document).on("click",".rmbtn", function() {
             var trClass = $(this).closest("tr").attr("class");
             $("."+trClass+"").remove();
+        });
+
+        $(document).on("keyup","#jobtext",function(){
+            var search_str = $("#jobtext").val();
+            $.ajax({
+                url: 'getdata.php',
+                type: 'POST',
+                data: {search:search_str},
+                success: function(data) {
+                    myObj = JSON.parse(data);
+                    var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";            
+                    $.each(myObj, function(i, item) {
+                        title = item.title;
+                        qualification = item.qualification;
+                        salary = item.salary;
+                        url = item.url;
+                        if(title!="null"){
+                            code1+="<tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>"+title+"</p>";
+                        }
+                        if(qualification!=null){
+                            code1+="<p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Qualification - "+qualification+"</p>";
+                        }
+                        if(salary!=null){
+                            code1+="<p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Salary - "+salary+"</p>";
+                        }
+                        if(url!="null"){
+                            code1+="<a href='"+url+"'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr>";
+                        }
+                    });
+                    code1+="</table></div></div></div>";
+                    $(".desc").html(code1);
+                }
+            });
         });
 
         // For entire page code 
