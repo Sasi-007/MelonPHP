@@ -155,58 +155,6 @@
             padding: 0px 20px 0px 20px;
             resize: none;
         }
-/* embed below to id webdesign div */
-
-        div#webdesign {
-            margin: 0px 290px;
-        }
-
-        .post {
-            background-color: white;
-            padding: 0px 25px;
-        }
-
-        p.postpar {
-            font-size: 18px;
-            font-weight: bold;
-            color: #abafb3;
-            margin: 0px 0px 15px 0px;
-        }
-
-        p.qualtxt {
-            font-size: 16px;
-            padding: 8px 0px 0px 5px;
-            font-weight: 600;
-            color: #7d7b7c;
-        }
-        
-        tr.posttr {
-            border: 2px solid #717277;
-        }
-
-        button.applybtn {
-            background-color: #ed931d;
-            color: white;
-            font-weight: 700;
-            border: 1px solid #ed931d;
-            border-radius: 3px;
-            padding: 5px 4px;
-            margin: 15px 0px 10px 5px;
-        }
-
-        p.posttxt {
-            font-size: 22px;
-            font-weight: bolder;
-            margin: 0px 0px 0px 5px;
-            line-height: 1;
-        }
-
-        p.theadtxt {
-            font-weight: bold;
-            color: #464646;
-            font-size: 16px;
-            margin: 0px 0px 0px 5px;
-        }
 
     </style>
 </head>
@@ -253,28 +201,6 @@
                 </div>
                 <div class="desc">
                     <textarea name="code" id="webcode" readonly></textarea>
-                    <div id="webdesign">
-                        <div class="post">
-                            <p class="postpar">Dear Jobseekers,</p>
-                            <p class="postpar">Latest Government jobs on hirelateral.com</p>
-                            <div class="posts">
-                                <table class="tablepost">
-                                    <tr class="posttr">
-                                        <th><p class="theadtxt">POST</p></th>
-                                    </tr>
-                                    <tr class="posttr">
-                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><a href="a.html"><button class="applybtn">APPLY HERE</button></a></td>
-                                    </tr>
-                                    <tr class="posttr">
-                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class="qualtxt">Qualification - M.Sc</p><p class="qualtxt">Salary - 20000 - 31000(Per Month)</p><a href="a.html"><button class="applybtn">APPLY HERE</button></a></td>
-                                    </tr>
-                                    <tr class="posttr">
-                                        <td><p class="posttxt">Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class="qualtxt">Qualification - M.Sc</p><p class="qualtxt">Salary - 20000 - 31000(Per Month)</p><a href="a.html"><button class="applybtn">APPLY HERE</button></a></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -293,16 +219,18 @@
             $("."+trClass+"").remove();
         });
 
-        var code = "";
-        code += $('html').html();
-        code += "\n\n";
-        $("style,link[rel='stylesheet']").each(function(){
-            code += $(this).text();
-        });
-        code += "\n\n";
-        $("script").each(function(){
-            code += $(this).text();
-        });
+        // for specific part of page
+        var code = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr><tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><a href='a.html'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr><tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Qualification - M.Sc</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Salary - 20000 - 31000(Per Month)</p><a href='a.html'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr><tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Qualification - M.Sc</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Salary - 20000 - 31000(Per Month)</p><a href='a.html'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr></table></div></div></div>";
+        // For entire page code 
+        // code += $('html').html();
+        // code += "\n\n";
+        // $("style,link[rel='stylesheet']").each(function(){
+        //     code += $(this).text();
+        // });
+        // code += "\n\n";
+        // $("script").each(function(){
+        //     code += $(this).text();
+        // });
         $("textarea").text(code);
         $("#webcode").hide();
         $("#webdesign").show();
@@ -311,6 +239,7 @@
         });
         $(".previewbtn").click(function(){
             $("#webdesign").toggle();
+            $(".desc").append("<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr><tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><a href='a.html'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr><tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Qualification - M.Sc</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Salary - 20000 - 31000(Per Month)</p><a href='a.html'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr><tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Qualification - M.Sc</p><p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Salary - 20000 - 31000(Per Month)</p><a href='a.html'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr></table></div></div></div>");
         });
     });
 </script>
