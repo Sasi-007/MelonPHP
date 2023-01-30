@@ -23,6 +23,10 @@
             height: auto;
         }
 
+        .btn {
+            display: block;
+        }
+
         .topic {
             text-align: center;
             font-size: 22px;
@@ -39,13 +43,15 @@
         p.subtopic {
             font-size: 22px;
             font-weight: bolder;
-            margin: 10px;
+            margin: 30px 10px;
         }
 
         button.actionbtn {
             background-color: #0b4c72;
             color: white;
             font-weight: bolder;
+            padding: 5px 20px;
+            border: none;
         }
 
         .rmbtn {
@@ -68,10 +74,20 @@
             width: 3%;
         }
 
+        .getbtn {
+            text-align: center;
+        }
+
         button.codebtn {
             background-color: #179721;
             color: white;
             font-weight: bolder;
+            padding: 5px 20px;
+            border: 0.5px solid #179721;
+        }
+
+        .jobsearch {
+            text-align: center;
         }
 
         p {
@@ -89,7 +105,8 @@
         }
 
         .mail {
-            margin: 30px;
+            margin: 0px 30px 30px 30px;
+            height: 610px;
         }
 
         .mailbtn {
@@ -107,8 +124,27 @@
             text-align: center;
         }
 
+        select#joblimit {
+            margin: 0px 15px 0px 0px;
+            padding: 7px 40px 7px 0px;
+            font-weight: 500;
+            border: 2px solid #0b4c72;
+        }
+
+        .search-bar {
+            text-align: center;
+            margin: 30px 0px 15px 0px;
+        }
+
         .mails {
             background-color: #f5f5dd;
+            height: 550px;
+        }
+
+        input#jobtext {
+            width: 65%;
+            border: 2px solid #c4c4c4;
+            height: 40px;
         }
 
         textarea#webcode {
@@ -151,7 +187,9 @@
         <div class="search-bar">
             <input type="text" name="jobtext" id="jobtext">
         </div>
-        <button type="submit" class="codebtn">GET CODE</button>
+        <div class="getbtn">
+            <button type="submit" class="codebtn">GET CODE</button>
+        </div>
         <div class="mail">
             <div class="preview">
                 <p>MAIL PREVIEW</p>
@@ -192,7 +230,9 @@
             code += $(this).text();
         });
         $("textarea").text(code);
-
+        $(".sourcebtn").click(function(){
+            $("#webcode").toggle();
+        });
     });
 </script>
 </html>
