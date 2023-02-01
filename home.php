@@ -181,6 +181,11 @@
                 <option value="option3">3</option>
                 <option value="option4">4</option>
                 <option value="option5">5</option>
+                <option value="option5">6</option>
+                <option value="option5">7</option>
+                <option value="option5">8</option>
+                <option value="option5">9</option>
+                <option value="option5">10</option>
             </select>
             <button class="add actionbtn">SEARCH JOBS</button>
         </div>
@@ -211,12 +216,12 @@
         var trCounter = 1;
         table.append("<tr><th class='jobno'>Jobs</th><th>Job Title</th><th>Job Url</th></tr>");
         for (var i = 0; i < 5; i++) {
-            table.append("<tr class='tjob' id='trow"+(i+1)+"'><td class='jobno'>Job" + (i + 1) + ":</td><td class='txt-adj'><input type='text' class='txtjob' id='title"+(i+1)+"'></td><td class='txt-adj'><input type='text' class='txtjob' id='url"+(i+1)+"'></td><td class='jobclose'><button class='btn btn-danger rmbtn' type='button' id='close-btn"+(i+1)+"'>X</button></td></tr>");
+            table.append("<tr class='tjob' id='trow"+(i+1)+"'><td class='jobno'>Job" + (i + 1) + ":</td><td class='txt-adj'><input type='text' class='txtjob' id='title"+(i+1)+"'></td><td class='txt-adj'><input type='text' class='txtjob txturl' id='url"+(i+1)+"'></td><td class='jobclose'><button class='btn btn-danger rmbtn' type='button' id='close-btn"+(i+1)+"'>X</button></td></tr>");
             trCounter++;
         }
 
         $(document).on("click","#add_btn", function() {
-            table.append("<tr class='tjob' id='trow"+trCounter+"'><td class='jobno'>Job" + trCounter + ":</td><td class='txt-adj'><input type='text' class='txtjob' id='title"+trCounter+"'></td><td class='txt-adj'><input type='text' class='txtjob' id='url"+trCounter+"'></td><td class='jobclose'><button class='btn btn-danger rmbtn' type='button' id='close-btn"+trCounter+"'>X</button></td></tr>");
+            table.append("<tr class='tjob' id='trow"+trCounter+"'><td class='jobno'>Job" + trCounter + ":</td><td class='txt-adj'><input type='text' class='txtjob' id='title"+trCounter+"'></td><td class='txt-adj'><input type='text' class='txtjob txturl' id='url"+trCounter+"'></td><td class='jobclose'><button class='btn btn-danger rmbtn' type='button' id='close-btn"+trCounter+"'>X</button></td></tr>");
             trCounter++;
         });
 
@@ -251,9 +256,43 @@
             }
         });
 
-        var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
+        var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
 
         $(".mail").hide();
+
+        $(document).on("change",".txturl",function(){
+            var title = [];
+            var url = [];
+            $('#myTable tr td input[type="text"]').each(function(index) {
+                if (index % 2 === 0) {
+                    title.push($(this).val());
+                } else {
+                    url.push($(this).val());
+                }
+            });
+            var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
+            for(var i=0;i<title.length;i++){
+                if(title[i]!=""){
+                    code1+="<tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>"+title[i]+"</p>";
+                }
+                if(url[i]!=""){
+                    code1+="<a href='"+url[i]+"'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr>";
+                }
+            }
+            code1+="</table></div></div></div>";
+            console.log(url);
+            console.log(code1);
+            $(".mail").show();
+            $(".sourcebtn").click(function() {
+                var code2="<textarea name='code' id='webcode' readonly></textarea>";
+                $(".desc").html(code2);
+                $("textarea").text(code1);
+            });
+
+            $(".previewbtn").click(function() {
+                $(".desc").html(code1);
+            });
+        });
 
         $(document).on("click","#get_code",function(){
             $.ajax({
@@ -294,7 +333,7 @@
                 data: {search:search_str},
                 success: function(data) {
                     myObj = JSON.parse(data);
-                    var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";            
+                    var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";            
                     $.each(myObj, function(i, item) {
                         title = item.title;
                         qualification = item.qualification;
@@ -318,17 +357,6 @@
                 }
             });
         });
-
-        // For entire page code 
-        // code += $('html').html();
-        // code += "\n\n";
-        // $("style,link[rel='stylesheet']").each(function(){
-        //     code += $(this).text();
-        // });
-        // code += "\n\n";
-        // $("script").each(function(){
-        //     code += $(this).text();
-        // });
 
         $(".sourcebtn").click(function() {
             var code2="<textarea name='code' id='webcode' readonly></textarea>";
