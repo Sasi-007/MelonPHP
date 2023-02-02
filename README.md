@@ -13,7 +13,6 @@ CREATE TABLE `jobs` (
 
 INSERT INTO `jobs` (`title`, `url`, `qualification`, `salary`) VALUES
 ('Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies', 'test.php', NULL, NULL),
-('Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies', 'test.php', 'M.Sc', '20000 - 31000(Per Month)'),
-('Indian Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies', 'test.php', 'M.Sc', '20000 - 31000(Per Month)'),
 ('sasi Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies', 'home.php', NULL, NULL),
-('melon Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies', 'home.php', 'BE', '25K');
+('melon Institute of Science Education and Research Tirupati for Junior Research Fellow - 2 vacancies', 'home.php', 'BE', '25K'),
+('melon', 'melon.php', '12', '25k');
