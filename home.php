@@ -156,6 +156,28 @@
             resize: none;
         }
 
+        div#suggestion-box {
+            position: absolute;
+            background-color: #f9f9f9;
+            width: 65%;
+            margin: 0px 0px 0px 236px;
+            box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+
+        .slist {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .slist:hover {
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -176,21 +198,23 @@
         <div class="jobsearch">
             <select id="joblimit">
                 <option disabled selected>Select Limit</option>
-                <option value="option1">1</option>
-                <option value="option2">2</option>
-                <option value="option3">3</option>
-                <option value="option4">4</option>
-                <option value="option5">5</option>
-                <option value="option5">6</option>
-                <option value="option5">7</option>
-                <option value="option5">8</option>
-                <option value="option5">9</option>
-                <option value="option5">10</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
             </select>
-            <button class="add actionbtn">SEARCH JOBS</button>
+            <button class="add actionbtn" id="search-limit">SEARCH JOBS</button>
         </div>
         <div class="search-bar">
-            <input type="text" name="jobtext" id="jobtext">
+            <input type="text" id="jobtext">
+            <div id="suggestion-box">
+            </div>
         </div>
         <div class="getbtn">
             <button type="submit" class="codebtn" id="get_code">GET CODE</button>
@@ -256,9 +280,70 @@
             }
         });
 
-        var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
+        function render_job_table(jsonObj) {
+            var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' id='t_head' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
+            $.each(jsonObj, function(i, item) {
+                title = item.title;
+                qualification = item.qualification;
+                salary = item.salary;
+                url = item.url;
+                if(title!="null"){
+                    code1+="<tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>"+title+"</p>";
+                }
+                if(qualification!=null){
+                    code1+="<p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Qualification - "+qualification+"</p>";
+                }
+                if(salary!=null){
+                    code1+="<p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Salary - "+salary+"</p>";
+                }
+                if(url!="null"){
+                    code1+="<a href='"+url+"'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr>";
+                }
+            });
+            code1+="</table></div></div></div>";
+            return code1;
+        }
 
+        var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' id='t_head' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
+        $is_table=0;
         $(".mail").hide();
+        $("#suggestion-box").hide();
+
+        $(document).on("click","#search-limit",function(){
+            var search_str = $("#jobtext").val();
+            var limit = $("select").val();
+            limit = (!limit || limit.length === 0) ? 10 : limit;
+            var code1='';
+            if(search_str.length!=0){
+                $.ajax({
+                    url: 'getdata.php',
+                    type: 'POST',
+                    data: {search:search_str,type:"search_limit",option:limit},
+                    success: function(data) {
+                        myObj = JSON.parse(data);
+                        console.log(render_job_table(myObj));
+                        code1 = render_job_table(myObj);
+                    }
+                });
+                $(".mail").show();
+            }
+            $(".sourcebtn").click(function() {
+                var code2="<textarea name='code' id='webcode' readonly></textarea>";
+                $(".desc").html(code2);
+                $("textarea").text(code1);
+            });
+
+            $(".previewbtn").click(function() {
+                $(".desc").html(code1);
+            }); 
+        });
+
+        $(document).mouseup(function (e) {
+            var container = $("#suggestion-box");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide();
+            }
+        });
 
         $(document).on("change",".txturl",function(){
             var title = [];
@@ -279,9 +364,7 @@
                     code1+="<a href='"+url[i]+"'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr>";
                 }
             }
-            code1+="</table></div></div></div>";
-            console.log(url);
-            console.log(code1);
+            // code1+="</table></div></div></div>";
             $(".mail").show();
             $(".sourcebtn").click(function() {
                 var code2="<textarea name='code' id='webcode' readonly></textarea>";
@@ -295,50 +378,75 @@
         });
 
         $(document).on("click","#get_code",function(){
+            var code1='';
             $.ajax({
                 url: 'getdata.php',
                 type: 'POST',
-                data: {search:"start"},
+                data: {search:"start",type:"start"},
                 success: function(data) {
                     myObj = JSON.parse(data);
-                    $.each(myObj, function(i, item) {
-                        title = item.title;
-                        qualification = item.qualification;
-                        salary = item.salary;
-                        url = item.url;
-                        if(title!="null"){
-                            code1+="<tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>"+title+"</p>";
-                        }
-                        if(qualification!=null){
-                            code1+="<p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Qualification - "+qualification+"</p>";
-                        }
-                        if(salary!=null){
-                            code1+="<p class='qualtxt' style='font-size: 16px;padding: 8px 0px 0px 5px;font-weight: 600;color: #7d7b7c;'>Salary - "+salary+"</p>";
-                        }
-                        if(url!="null"){
-                            code1+="<a href='"+url+"'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr>";
-                        }
-                    });
-                    code1+="</table></div></div></div>";
+                    code1 = render_job_table(myObj);
                 }
             });
             $(".mail").show();
+            $(".sourcebtn").click(function() {
+                var code2="<textarea name='code' id='webcode' readonly></textarea>";
+                $(".desc").html(code2);
+                $("textarea").text(code1);
+            });
+
+            $(".previewbtn").click(function() {
+                $(".desc").html(code1);
+            }); 
         });
 
         $(document).on("keyup","#jobtext",function(){
             var search_str = $("#jobtext").val();
+            if(search_str.length>0){
+                $("#suggestion-box").css("display", "block");
+            }else{
+                $("#suggestion-box").css("display", "none");
+            }
             $.ajax({
                 url: 'getdata.php',
                 type: 'POST',
-                data: {search:search_str},
+                data: {search:search_str,type:"suggestion"},
+                success: function(data) {
+                    var div_code = "";
+                    $("#suggestion-box").empty();
+                    myObj = JSON.parse(data);
+                    $.each(myObj, function(i, item) {
+                        div_code+='<div class="slist" id="list'+i+'">'+item.title+'</div>';
+                    });
+                    $('#suggestion-box').append(div_code);
+                }
+            });
+        });
+
+        $(document).on("click",".slist",function(){
+            var id = "#"+($(this).attr("id"));
+            text_val = $(id).text();
+            $.ajax({
+                url: 'getdata.php',
+                type: 'POST',
+                data: {search:text_val,type:"keyword"},
                 success: function(data) {
                     myObj = JSON.parse(data);
-                    var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";            
+                    var job_txt='';
                     $.each(myObj, function(i, item) {
+                    if(i!=0){
+                        job_txt+=', ';
+                    }
+                        if ($("#webdesign").length) {
+                            console.log("Element with id 'element_id' exists");
+                        } else {
+                            var code1 = "<div id='webdesign' style='margin: 0px 290px;'><div class='post' style='background-color: white;padding: 0px 25px;'><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Dear Jobseekers,</p><p class='postpar' style='font-size: 18px;font-weight: bold;color: #abafb3;margin: 0px 0px 15px 0px;'>Latest Government jobs on hirelateral.com</p><div class='posts'><table class='tablepost' style='width: 100%'><tr class='posttr' style='border: 2px solid #717277;'><th><p class='theadtxt' style='font-weight: bold;color: #464646;font-size: 16px;margin: 0px 0px 0px 5px;'>POST</p></th></tr>";
+                        }
                         title = item.title;
                         qualification = item.qualification;
                         salary = item.salary;
                         url = item.url;
+                        job_txt+=title;
                         if(title!="null"){
                             code1+="<tr class='posttr' style='border: 2px solid #717277;'><td><p class='posttxt' style='font-size: 22px;font-weight: bolder;margin: 0px 0px 0px 5px;line-height: 1;'>"+title+"</p>";
                         }
@@ -351,9 +459,22 @@
                         if(url!="null"){
                             code1+="<a href='"+url+"'><button class='applybtn' style='background-color: #ed931d;color: white;font-weight: 700;border: 1px solid #ed931d;border-radius: 3px;padding: 5px 4px;margin: 15px 0px 10px 5px;'>APPLY HERE</button></a></td></tr>";
                         }
+                        // code1+="</table></div></div></div>";
+                        $(".mail").show();
+                        $(".sourcebtn").click(function() {
+                            var code2="<textarea name='code' id='webcode' readonly></textarea>";
+                            // $(".tablepost").before(code1);
+                            $(".desc").html(code2);
+                            $("textarea").text(code1);
+                        });
+
+                        $(".previewbtn").click(function() {
+                            // $(".tablepost").before(code1);
+                            $(".desc").html(code1);
+                        });
                     });
-                    code1+="</table></div></div></div>";
-                    $(".desc").html(code1);
+                    $("#jobtext").val(job_txt);
+                    $("#suggestion-box").css("display", "none");
                 }
             });
         });
